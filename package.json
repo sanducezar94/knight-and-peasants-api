@@ -1,0 +1,17 @@
+{
+  "name": "trest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js --mode development"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "web3": "^1.7.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "nan": "^2.15.0"
+  }
+}
