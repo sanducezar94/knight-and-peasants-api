@@ -88,7 +88,7 @@ async function updateKnightMetadata(knights) {
         });
     }
 
-    fs.writeFile('metadataTest.json', JSON.stringify(metadata), function (err) {
+    fs.writeFile('./data/api_metadata_new.json', JSON.stringify(metadata), function (err) {
         if (err) return console.log(err);
     });
 }
