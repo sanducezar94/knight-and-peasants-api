@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 
 const KnightNFT = require('./knights.json');
+
 const bodyParser = require("body-parser");
 
 const app = express();
@@ -10,7 +11,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
 const Web3 = require('web3');
-const web3 = new Web3(new Web3.providers.HttpProvider('https://api.s0.t.hmny.io'));
+const web3 = new Web3(new Web3.providers.HttpProvider('https://rpc.hermesdefi.io/'));
 
 const contract = new web3.eth.Contract(KnightNFT.abi, KnightNFT.address);
 

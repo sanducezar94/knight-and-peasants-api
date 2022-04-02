@@ -1,6 +1,5 @@
 {
     "address": "0x56eb68f994A4e2D8D6FAe6Ca4B5061B6f7FD92Cb",
-    "testnet": "0x56b726204A812621B891816Ae7b6346a0edb9fAD",
     "abi": [
         {
             "inputs": [],
@@ -60,7 +59,7 @@
         },
         {
             "inputs": [],
-            "name": "TeamKnightsNotTransferableYet",
+            "name": "SquireMintingNotAllowedYet",
             "type": "error"
         },
         {
@@ -210,25 +209,6 @@
             "inputs": [
                 {
                     "indexed": false,
-                    "internalType": "uint256",
-                    "name": "tokenId",
-                    "type": "uint256"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "uint256",
-                    "name": "newLevel",
-                    "type": "uint256"
-                }
-            ],
-            "name": "KnightLeveledUp",
-            "type": "event"
-        },
-        {
-            "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": false,
                     "internalType": "string",
                     "name": "attribute",
                     "type": "string"
@@ -333,12 +313,6 @@
         },
         {
             "anonymous": false,
-            "inputs": [],
-            "name": "TeamKnightsFlippedToTransferable",
-            "type": "event"
-        },
-        {
-            "anonymous": false,
             "inputs": [
                 {
                     "indexed": true,
@@ -416,12 +390,12 @@
         },
         {
             "inputs": [],
-            "name": "TEAM_EMITTING_KNIGHT_COUNT",
+            "name": "SQUIRE_MINTER_ROLE",
             "outputs": [
                 {
-                    "internalType": "uint256",
+                    "internalType": "bytes32",
                     "name": "",
-                    "type": "uint256"
+                    "type": "bytes32"
                 }
             ],
             "stateMutability": "view",
@@ -449,13 +423,6 @@
                 }
             ],
             "name": "addToWhitelist",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "name": "allowTeamKnightsToBeSold",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -511,19 +478,6 @@
             "type": "function"
         },
         {
-            "inputs": [],
-            "name": "canSellTeamKnights",
-            "outputs": [
-                {
-                    "internalType": "bool",
-                    "name": "",
-                    "type": "bool"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
             "inputs": [
                 {
                     "internalType": "uint256",
@@ -537,30 +491,6 @@
                     "internalType": "address",
                     "name": "",
                     "type": "address"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "_tokenId",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "string",
-                    "name": "_attribute",
-                    "type": "string"
-                }
-            ],
-            "name": "getAttribute",
-            "outputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
                 }
             ],
             "stateMutability": "view",
@@ -605,25 +535,6 @@
                     "internalType": "struct IKnights.AttributeView[]",
                     "name": "",
                     "type": "tuple[]"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "_tokenId",
-                    "type": "uint256"
-                }
-            ],
-            "name": "getKnightTimeOfMint",
-            "outputs": [
-                {
-                    "internalType": "uint64",
-                    "name": "",
-                    "type": "uint64"
                 }
             ],
             "stateMutability": "view",
@@ -767,14 +678,9 @@
                     "internalType": "uint256",
                     "name": "_amount",
                     "type": "uint256"
-                },
-                {
-                    "internalType": "bool",
-                    "name": "_didLevelUp",
-                    "type": "bool"
                 }
             ],
-            "name": "increaseAttributeLevel",
+            "name": "increaseLevel",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -832,6 +738,19 @@
             "name": "mint",
             "outputs": [],
             "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_to",
+                    "type": "address"
+                }
+            ],
+            "name": "mintSquire",
+            "outputs": [],
+            "stateMutability": "nonpayable",
             "type": "function"
         },
         {
