@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node knightUpdater.js --mode development"
+    "server": "node server.js",
+    "updater": "node knightUpdater.js"
   },
   "author": "",
   "license": "ISC",

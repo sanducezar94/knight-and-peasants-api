@@ -1,5 +1,5 @@
 const express = require('express');
-fs = require('fs');
+const fs = require('fs');
 
 const KnightNFT = require('./artifacts/knights.json');
 const TrainingCamp = require('./artifacts/trainingCamp.json');
@@ -8,14 +8,14 @@ const Bank = require('./artifacts/bank.json');
 const app = express();
 const Web3 = require('web3');
 
-const chainKey = 'testnet';
+const chainKey = 'mainnet';
 const provider = chainKey === 'testnet' ? 'https://api.s0.b.hmny.io' : 'https://rpc.hermesdefi.io/';
 
 const web3 = new Web3(new Web3.providers.HttpProvider(provider));
 
-const knightContract = new web3.eth.Contract(KnightNFT.abi[chainKey], KnightNFT.address);
-const campContract = new web3.eth.Contract(TrainingCamp.abi[chainKey], TrainingCamp.address);
-const bankContract = new web3.eth.Contract(Bank.abi[chainKey], Bank.address);
+const knightContract = new web3.eth.Contract(KnightNFT.abi, KnightNFT[chainKey]);
+const campContract = new web3.eth.Contract(TrainingCamp.abi, TrainingCamp[chainKey]);
+const bankContract = new web3.eth.Contract(Bank.abi, Bank[chainKey]);
 
 const multicall = require('@dopex-io/web3-multicall');
 const multicallContract = new multicall({
@@ -54,7 +54,6 @@ function updateKnightTrait(knight, attribute) {
     };
 
     attr.value = attribute.value;
-    knight.attributes.push(attr);
 }
 
 async function updateKnightMetadata(knights) {
@@ -94,7 +93,6 @@ async function updateKnightMetadata(knights) {
 }
 
 const service = setInterval(async () => {
-
     try {
         console.log("Fetching unique holders...")
         await getUniqueHolders();
@@ -113,7 +111,29 @@ const service = setInterval(async () => {
         console.log(error);
     }
 
-}, 1000 * 3600 * 2);
+}, 1000 * 3600 * 0.5);
+
+// INITIATE AN UPDATE WHEN THE SERVER IS STARTING
+setTimeout(async () => {
+    try {
+        console.log("Preparing knight update on server start...");
+        
+        console.log("Fetching unique holders...")
+        await getUniqueHolders();
+        console.log("Finished fetching unique holders.");
+
+        console.log("Fetching bank holders");
+        await getBankSnapshots();
+        console.log("Finished fetching bank holders")
+
+        console.log("Fetching camp data");
+        await getCampData();
+        console.log("Finished fetching camp data")
+
+    } catch (error) {
+        console.log(error);
+    }
+}, 5000);
 
 async function getUniqueHolders() {
     try {

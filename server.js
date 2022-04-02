@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
+const fs = require('fs');
 
 const KnightNFT = require('./artifacts/knights.json');
-
 const bodyParser = require("body-parser");
 
 const app = express();
@@ -84,6 +84,19 @@ app.get('/api/knights', async function (req, res, next) {
     return res.send({data: metaList});
   }
   catch(err){
+    return res.status(500).send('Internal Error');
+  }
+});
+
+app.get('/api/collectionData', async function (req, res, next) {
+  try{
+    fs.readFile('./stats/collectionData.json', async (err, data) => {
+        let jsonData = JSON.parse(data);
+        return res.send({data: jsonData.uniqueHolder});
+    });
+  }
+  catch(err){
+    console.log(err);
     return res.status(500).send('Internal Error');
   }
 });
