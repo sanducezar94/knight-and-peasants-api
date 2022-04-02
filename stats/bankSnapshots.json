@@ -1,0 +1,21 @@
+{
+    "holders": [{
+        "address": "0x7eA0EBe65031d3358d27cb09d8c3310EC53D9Ba4",
+        "amount": 0
+    }, {
+        "address": "0x7d0cf7d69E3Fb7eC50881FEd674f43fAed740cce",
+        "amount": 0
+    }, {
+        "address": "0xd7E0944b3166E0b7e4c3616d0c13A2fC5627cFA5",
+        "amount": 0.923533853084104
+    }, {
+        "address": "0x48Fda4c03bec8D10ceCc2d088B329a796E5360b6",
+        "amount": 502.54599045521803
+    }, {
+        "address": "0xE22d4F6cBe6497C7b0B33918F7915ED71423Db53",
+        "amount": 0
+    }, {
+        "address": "0xffe07ceA0BE6838D20b3B201181e60bA28dE482a",
+        "amount": 0
+    }]
+}
