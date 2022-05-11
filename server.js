@@ -2,8 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const fsPromises = fs.promises;
-
 const bodyParser = require("body-parser");
+
 
 const app = express();
 app.use(bodyParser.json());
@@ -11,21 +11,36 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
 // functions used in endpoints
-const metadata = require("./data/api_metadata_new.json");
-let metadata = [];
+var knightMetadata = [];
+var peasantMetadata = [];
+var itemList = ['purses'];
+var itemMetadata = { 
+  purses: []
+};
+
+async function fetchMetadata(){
+  const knightMetadataBytes = await fsPromises.readFile('./data/metadata/knights.json');
+  knightMetadata = JSON.parse(knightMetadataBytes);
+
+  const peasantMetadataBytes = await fsPromises.readFile('./data/metadata/peasants.json');
+  peasantMetadata = JSON.parse(peasantMetadataBytes);
+
+  itemList.forEach(async (item) => {
+    const itemMetadataBytes = await fsPromises.readFile(`./data/metadata/${item}.json`);
+    itemMetadata[item] = JSON.parse(itemMetadataBytes);
+  });
+}
 
 setInterval(async () => {
-  const metadataBytes = await fsPromises.read('./data/metadata/knights.json');
-  metadata = JSON.parse(metadataBytes);
+  await fetchMetadata();
 }, 1000 * 3600 * 0.11);
 
 setTimeout(async () => {
-  const metadataBytes = await fsPromises.read('./data/metadata/knights.json');
-  metadata = JSON.parse(metadataBytes);
+  await fetchMetadata();
 }, 100);
 
-async function getMetadataFromDatabase(id) {
-  let data = {};
+async function getMetadataFromDatabase(metadata, id) {
+  let data = {tokenId: -1};
   for (let i = 0; i < metadata.length; i++) {
     if (metadata[i].tokenId == id) {
         data = metadata[i];
@@ -112,9 +127,51 @@ app.get('/api/knights', async function (req, res, next) {
       const id = requestIds[i];
       let idInt = parseInt(id);
       if (totalSupply > idInt) {
-        let meta = await getMetadataFromDatabase(idInt);
+        let meta = await getMetadataFromDatabase(knightMetadata, idInt);
         metaList.push(meta);
       }
+    }
+  
+    return res.send({data: metaList});
+  }
+  catch(err){
+    return res.status(500).send('Internal Error');
+  }
+});
+
+// takes a collection of ids and returns them all together
+app.get('/api/peasants', async function (req, res, next) {
+  try{
+    const knightsIds = req.query.items
+    let metaList = []
+    let requestIds = knightsIds.split(',');
+
+    for(let i = 0; i < requestIds.length; i++){
+      const id = requestIds[i];
+      let idInt = parseInt(id);
+      let meta = await getMetadataFromDatabase(peasantMetadata, idInt);
+      metaList.push(meta);
+    }
+  
+    return res.send({data: metaList});
+  }
+  catch(err){
+    return res.status(500).send('Internal Error');
+  }
+});
+
+// takes a collection of ids and returns them all together
+app.get('/api/purses', async function (req, res, next) {
+  try{
+    const knightsIds = req.query.items
+    let metaList = []
+    let requestIds = knightsIds.split(',');
+
+    for(let i = 0; i < requestIds.length; i++){
+      const id = requestIds[i];
+      let idInt = parseInt(id);
+      let meta = await getMetadataFromDatabase(itemMetadata["bags"], idInt);
+      metaList.push(meta);
     }
   
     return res.send({data: metaList});
@@ -139,7 +196,7 @@ app.get('/api/collectionData', async function (req, res, next) {
 
 app.get('/api/knightUpgrades', async function (req, res, next) {
   try{
-    fs.readFile('./stats/stats.json', async (err, data) => {
+    fs.readFile('./stats/newStats.json', async (err, data) => {
         let jsonData = JSON.parse(data);
         return res.send({data: jsonData});
     });
@@ -168,9 +225,10 @@ app.get('/api/knight', async function (req, res, next) {
       const totalSupply = 5000; //await contract.methods.totalSupply().call();
 
       let id = parseInt(knightId);
+      
 
       if (totalSupply > id) {
-        let meta = await getMetadataFromDatabase(id);
+        let meta = await getMetadataFromDatabase(knightMetadata, id);
         return res.send({data: meta});
       } else {
         return res.status(500).send('Not yet minted');
@@ -181,6 +239,7 @@ app.get('/api/knight', async function (req, res, next) {
     }
   });
 
-app.listen(8000, function() {
+app.listen(8000, async function() {
+  await fetchMetadata();
   console.log('API running on port 8000');
 });

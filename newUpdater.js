@@ -7,7 +7,7 @@ const PeasantNFT = require('./artifacts/peasants.json')
 const app = express();
 const Web3 = require('web3');
 
-const chainKey = 'testnet';
+const chainKey = 'mainnet';
 const provider = chainKey === 'testnet' ? 'https://api.s0.b.hmny.io' : 'https://rpc.gainzstation.one/';
 
 const web3 = new Web3(new Web3.providers.HttpProvider(provider));
@@ -43,7 +43,9 @@ const service = setInterval(async () => {
         await knightUpdater(campContract, multicallContract);
         console.log("Knight data updated.");
 
+        console.log("Fetching collection data...");
         await statCollector();
+        console.log("Collection data updated.");
 
     } catch (error) {
         console.log(error);
@@ -65,6 +67,10 @@ setTimeout(async () => {
         console.log("Updating knight data...");
         await knightUpdater(campContract, multicallContract);
         console.log("Knight data updated.");
+
+        console.log("Fetching collection data...");
+        await statCollector();
+        console.log("Collection data updated.");
 
     } catch (error) {
         console.log(error);

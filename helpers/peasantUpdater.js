@@ -43,9 +43,9 @@ const updateMetadataFromContract = async function updateMetadataFromContract(con
         let nft = metadata.filter(c => c.tokenId == i)[0];
         let peasantData = results[i];
 
-        const professionDisplay = peasantProfessions[peasantData[0]].toLowerCase();
-        const rarityDisplay = peasantRarities[peasantData[1]].toLowerCase();
-        const skillDisplay = peasantSkill[peasantData[2][3][1]].toLowerCase();
+        const professionDisplay = peasantProfessions[peasantData[0]];
+        const rarityDisplay = peasantRarities[peasantData[1]];
+        const skillDisplay = peasantSkill[peasantData[2][3][1]];
 
         if (!nft) {
             nft = {
@@ -53,7 +53,7 @@ const updateMetadataFromContract = async function updateMetadataFromContract(con
                 "name": `Peasant #${i}`,
                 "description": `A ${rarityDisplay} ${skillDisplay} ${professionDisplay} peasant.`,
                 "external_url": "",
-                "image": "",
+                "image": `${professionDisplay.toLowerCase()}_${peasantData[1]}.png`,
                 "attributes": []
             };
             metadata.push(nft);
@@ -79,11 +79,11 @@ const updateMetadataFromContract = async function updateMetadataFromContract(con
 
         updateTrait(nft, {
             "trait_type": "Talent",
-            "value": parseInt(peasantData[2][0][1])
+            "value":  ((parseInt(peasantData[2][0][1]) / 10 ** 18 - 0.9) * 10).toFixed(0)
         });
         updateTrait(nft, {
             "trait_type": "Labour",
-            "value": parseInt(peasantData[2][1][1])
+            "value": ((parseInt(peasantData[2][1][1]) / 10 ** 18 - 0.9) * 10).toFixed(0)
         });
         updateTrait(nft, {
             "trait_type": "Experience",

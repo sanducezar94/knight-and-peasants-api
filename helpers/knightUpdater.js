@@ -80,9 +80,7 @@ const updateMetadataFromContract = async function updateMetadataFromContract(con
         
     }
 
-    fs.writeFile('./data/metadata/knights.json', JSON.stringify(metadata), function (err) {
-        if (err) return console.log(err);
-    });
+    await fsPromises.writeFile('./data/metadata/knights.json', JSON.stringify(metadata));
 }
 
 module.exports = updateMetadataFromContract;

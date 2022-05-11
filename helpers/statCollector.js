@@ -26,7 +26,7 @@ let data = {
     "HorseMastery3": 0
 };
 
-const collectStats = () => {
+const collectStats = async () => {
     const metadataBytes = await fsPromises.readFile('./data/metadata/knights.json');
     const metadata = JSON.parse(metadataBytes);
     
@@ -54,6 +54,8 @@ const collectStats = () => {
 
             }
         }
+
+        console.log(data);
 
         fs.writeFile('./stats/newStats.json', JSON.stringify(data), async (err, data) => {
             if(err) console.log(err);

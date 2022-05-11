@@ -3,8 +3,8 @@ const fsPromises = fs.promises;
 
 const purseSizes = [10, 50, 100, 250, 500, 1000, 2500, 5000];
 const purseMappings = {
-    "0x4e0c9ff0fb128eb4f99ec6f8b206155c5a86de44": "xFarmer",
-    "0x78e568b6fc90487a576e65d74b9530da7b5e2949": "xAlchemist",
+    "0x5a9ac6c271653dc5660ae90e8ecf1401164a2690": "Farmer",
+    "0x9aa6715bfa11e5bd63af420f480c758c7038e08a": "Alchemist",
 }
 
 function updateTrait(nft, attribute) {
@@ -53,9 +53,9 @@ const updateMetadataFromContract = async function updateMetadataFromContract(con
             nft = {
                 "tokenId": i,
                 "name": `Purse #${i}`,
-                "description": `A purse containing ${purseSize} ${wageName} tokens.`,
+                "description": `A purse containing ${purseSize} x${wageName} tokens.`,
                 "external_url": "",
-                "image": `${purseData.purseSize}.png`,
+                "image": `${wageName.toLowerCase()}/${purseData.purseSize}.png`,
                 "attributes": []
             };
             metadata.push(nft);
@@ -63,7 +63,7 @@ const updateMetadataFromContract = async function updateMetadataFromContract(con
 
         updateTrait(nft, {
             "trait_type": "Purse Size",
-            "value": purseSize
+            "value": purseSize.toString()
         });
         updateTrait(nft, {
             "trait_type": "Wage Token",
