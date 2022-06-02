@@ -23,7 +23,6 @@ const multicallContract = new multicall({
 });
 
 const statCollector = require('./helpers/statCollector.js');
-
 const peasantUpdater = require('./helpers/peasantUpdater');
 const purseUpdater = require('./helpers/purseUpdater');
 const knightUpdater = require('./helpers/knightUpdater');

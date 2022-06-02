@@ -55,7 +55,7 @@ const updateMetadataFromContract = async function updateMetadataFromContract(con
                 "name": `Purse #${i}`,
                 "description": `A purse containing ${purseSize} x${wageName} tokens.`,
                 "external_url": "",
-                "image": `${wageName.toLowerCase()}/${purseData.purseSize}.png`,
+                "image": `https://api.knightsandpeasants.one/images/peasants?type=${wageName.toLowerCase()}&size=${purseData.purseSize}.png`,
                 "attributes": []
             };
             metadata.push(nft);

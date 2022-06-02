@@ -17,6 +17,7 @@
     "ethers-multicall": "^0.2.2",
     "express": "^4.17.3",
     "nan": "^2.15.0",
+    "uniswap-vue": "^1.0.5",
     "web3": "^1.7.1"
   }
 }
