@@ -1,22 +1,54 @@
 const path = require('path');
 
+let metadata = require('../data/metadata/peasants.json');
+
+let timeOut = setInterval(() => {
+  metadata = require('../data/metadata/peasants.json');
+}, 3600 * 1000);
+
+async function getMetadataFromDatabase(id) {
+  let data = {};
+  for (var i = 0; i < metadata.length; i++) {
+    if (metadata[i].tokenId == id) {
+      data = metadata[i];
+      break;
+    }
+  }
+
+  return data;
+}
+
 const peasantEndpoints = (app) => {
   // takes a collection of ids and returns them all together
   app.get('/api/peasants', async function (req, res, next) {
     try {
       const knightsIds = req.query.items
+
       let metaList = []
       let requestIds = knightsIds.split(',');
 
       for (let i = 0; i < requestIds.length; i++) {
         const id = requestIds[i];
         let idInt = parseInt(id);
-        let meta = await getMetadataFromDatabase(peasantMetadata, idInt);
+        let meta = await getMetadataFromDatabase(idInt);
         metaList.push(meta);
       }
 
       return res.send({
         data: metaList
+      });
+    } catch (err) {
+      return res.status(500).send('Internal Error');
+    }
+  });
+
+  app.get('/api/peasant', async function (req, res, next) {
+    try {
+      const id = parseInt(req.query["id"]);
+      let data = await getMetadataFromDatabase(id);
+
+      return res.send({
+        data: data
       });
     } catch (err) {
       return res.status(500).send('Internal Error');

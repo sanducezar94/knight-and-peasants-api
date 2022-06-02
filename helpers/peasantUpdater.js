@@ -77,7 +77,7 @@ const updateMetadataFromContract = async function updateMetadataFromContract(con
                 "name": `Peasant #${i}`,
                 "description": `A ${rarityDisplay} ${skillDisplay} ${professionDisplay} peasant.`,
                 "external_url": "",
-                "image": `https://api.knightsandpeasants.one/images/peasants?type=${professionDisplay.toLowerCase()}&rarity=${parseInt(peasantData[1])}.png`,
+                "image": `https://api.knightsandpeasants.one/images/peasants?id=${i}`,
                 "attributes": []
             };
             metadata.push(nft);

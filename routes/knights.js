@@ -1,7 +1,13 @@
 const path = require('path');
 
+let metadata = require('../data/metadata/knights.json');
 
-async function getMetadataFromDatabase(metadata, id) {
+let timeOut = setInterval(() => {
+    metadata = require('../data/metadata/knights.json');
+}, 3600 * 1000);
+
+
+async function getMetadataFromDatabase(id) {
     let data = {tokenId: -1};
     for (let i = 0; i < metadata.length; i++) {
       if (metadata[i].tokenId == id) {
@@ -91,7 +97,7 @@ const knightEndpoints = (app) => {
           const id = requestIds[i];
           let idInt = parseInt(id);
           if (totalSupply > idInt) {
-            let meta = await getMetadataFromDatabase(knightMetadata, idInt);
+            let meta = await getMetadataFromDatabase(idInt);
             metaList.push(meta);
           }
         }
@@ -123,9 +129,8 @@ const knightEndpoints = (app) => {
     
           let id = parseInt(knightId);
           
-    
           if (totalSupply > id) {
-            let meta = await getMetadataFromDatabase(knightMetadata, id);
+            let meta = await getMetadataFromDatabase(id);
             return res.send({data: meta});
           } else {
             return res.status(500).send('Not yet minted');

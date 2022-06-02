@@ -45,28 +45,6 @@ setTimeout(async () => {
   await fetchMetadata();
 }, 100);
 
-// takes a collection of ids and returns them all together
-app.get('/api/purses', async function (req, res, next) {
-  try {
-    const knightsIds = req.query.items
-    let metaList = []
-    let requestIds = knightsIds.split(',');
-
-    for (let i = 0; i < requestIds.length; i++) {
-      const id = requestIds[i];
-      let idInt = parseInt(id);
-      let meta = await getMetadataFromDatabase(itemMetadata["bags"], idInt);
-      metaList.push(meta);
-    }
-
-    return res.send({
-      data: metaList
-    });
-  } catch (err) {
-    return res.status(500).send('Internal Error');
-  }
-});
-
 app.get('/api/accountInfo', async function (req, res, next) {
   try {
     const account = req.query.account.toLowerCase();
