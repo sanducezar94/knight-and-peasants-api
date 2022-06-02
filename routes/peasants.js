@@ -1,10 +1,27 @@
 const path = require('path');
 
+let metadataImage = {};
 let metadata = require('../data/metadata/peasants.json');
 
 let timeOut = setInterval(() => {
-  metadata = require('../data/metadata/peasants.json');
+  initializeMetadata();
 }, 3600 * 1000);
+
+function initializeMetadata() {
+  metadata = require('../data/metadata/peasants.json');
+  metadataImage = {};
+
+  for (let i = 0; i < metadata.length; i++) {
+    metadataImage[i] = {
+      type: metadata[i].attributes[1].value.toLowerCase(),
+      rarity: parseInt(metadata[i].attributes[2].value)
+    }
+  }
+
+}
+
+//INITIALIZE
+initializeMetadata();
 
 async function getMetadataFromDatabase(id) {
   let data = {};
@@ -57,8 +74,9 @@ const peasantEndpoints = (app) => {
 
   app.get('/images/peasants', async function (req, res, next) {
     try {
-      const rarity = parseInt(req.query["rarity"]);
-      const type = req.query["type"];
+      const id = parseInt(req.query['id']);
+      const rarity = metadataImage[id].rarity;
+      const type = metadataImage[id].type;
 
       return res.set({
         'Cache-Control': 'max-age=31536000'

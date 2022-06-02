@@ -1,17 +1,27 @@
 const path = require('path');
 
 
-let metadata = require('../data/metadata/purses.json');
 let metadataImage = {};
+let metadata = require('../data/metadata/purses.json');
 
 let timeOut = setInterval(() => {
-    metadata = require('../data/metadata/purses.json');
-
-    for(let i = 0; i < metadata.length; i++){
-        metadataImage[i] = metadata[i].image;
-    };
-
+  initializeMetadata();
 }, 3600 * 1000);
+
+function initializeMetadata() {
+  metadata = require('../data/metadata/purses.json');
+  metadataImage = {};
+
+  for (let i = 0; i < metadata.length; i++) {
+    metadataImage[i] = {
+      type: metadata[i].attributes[1].value.toLowerCase(),
+      size: parseInt(metadata[i].attributes[2].value)
+    }
+  }
+}
+
+//INITIALIZE
+initializeMetadata();
 
 async function getMetadataFromDatabase(id) {
     let data = {};
@@ -53,7 +63,9 @@ const bagsEndpoints = (app) => {
         try {
             const id = parseInt(req.query["id"]);
 
-            let metadata = metadataImage[id];
+            console.log(metadataImage[id]);
+            const type = metadataImage[id].type;
+            const size = metadataImage[id].size;
 
             return res.set({
                 'Cache-Control': 'max-age=31536000'

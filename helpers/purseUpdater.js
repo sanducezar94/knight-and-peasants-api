@@ -69,6 +69,10 @@ const updateMetadataFromContract = async function updateMetadataFromContract(con
             "trait_type": "Wage Token",
             "value": wageName
         });
+        updateTrait(nft, {
+            "trait_type": "Size Id",
+            "value": parseInt(purseData.purseSize)
+        });
     }
 
     fs.writeFile('./data/metadata/purses.json', JSON.stringify(metadata), function (err) {
