@@ -56,7 +56,7 @@ const service = setInterval(async () => {
 setTimeout(async () => {
     try {
         console.log("Updating peasant data...");
-        await peasantUpdater(peasantContract, multicallContract);
+        //await peasantUpdater(peasantContract, multicallContract);
         console.log("Peasant data updated...");
 
         console.log("Updating purse data...");
@@ -64,11 +64,11 @@ setTimeout(async () => {
         console.log("Coin purses updated.");
 
         console.log("Updating knight data...");
-        await knightUpdater(campContract, multicallContract);
+        //await knightUpdater(campContract, multicallContract);
         console.log("Knight data updated.");
 
         console.log("Fetching collection data...");
-        await statCollector();
+        //await statCollector();
         console.log("Collection data updated.");
 
     } catch (error) {

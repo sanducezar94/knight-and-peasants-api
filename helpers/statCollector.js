@@ -55,7 +55,7 @@ const collectStats = async () => {
             }
         }
 
-        await fsPromises.writeFile('./stats/newStats.json', JSON.stringify(data));
+        await fsPromises.writeFile('./stats/newStats.json', JSON.stringify(data), {encoding:'utf8',flag:'w'});
     }
     catch(err){
         console.log(err);

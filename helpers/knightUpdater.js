@@ -143,7 +143,7 @@ async function updateRarity(traitRarityList, metadata){
         rarities[rarityList[i].tokenId] = i + 1;
     }
 
-    await fsPromises.writeFile('./data/rarity/knights.json', JSON.stringify(rarities));
+    await fsPromises.writeFile('./data/rarity/knights.json', JSON.stringify(rarities), {encoding:'utf8',flag:'w'});
 }
 
 module.exports = updateMetadataFromContract;

@@ -28,14 +28,11 @@ const updateMetadataFromContract = async function updateMetadataFromContract(con
     const metadata = JSON.parse(metadataBytes);
 
     const currentSupply = await contract.methods.pursesCreated().call();
-    const lastIndex = metadata.length > 0 ? metadata[metadata.length - 1].tokenId : 0;
 
     let calls = [];
     let results = [];
 
-    console.log("Bags supply", currentSupply);
-
-    for (let i = lastIndex; i < currentSupply; i += 1) {
+    for (let i = 0; i < 347; i += 1) {
         calls.push(contract.methods.getPurseContent(i));
 
         if (i % BATCH_SIZE >= BATCH_SIZE - 1 || i === currentSupply - 1) {
@@ -43,6 +40,8 @@ const updateMetadataFromContract = async function updateMetadataFromContract(con
             calls = [];
         }
     }
+
+    console.log("Bags supply", currentSupply, results.length);
 
     for (let i = 0; i < results.length; i++) {
         let nft = metadata.filter(c => c.tokenId == i)[0];
@@ -77,7 +76,7 @@ const updateMetadataFromContract = async function updateMetadataFromContract(con
         });
     }
 
-    await fsPromises.writeFile('/data/metadata/purses.json', JSON.stringify(metadata));
+    await fsPromises.writeFile('./data/metadata/purses.json', JSON.stringify(metadata), {encoding:'utf8',flag:'w'});
 }
 
 module.exports = updateMetadataFromContract;

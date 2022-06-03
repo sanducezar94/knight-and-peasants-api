@@ -107,9 +107,3 @@ dist
 
 # TernJS port file
 .tern-port
-*.json
-data/rarity/peasants_traits.json
-data/rarity/knights_traits.json
-data/metadata/purses.json
-data/metadata/peasants.json
-data/metadata/knights.json
