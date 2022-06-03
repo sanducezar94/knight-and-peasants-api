@@ -2,13 +2,12 @@ const path = require('path');
 const fs = require('fs');
 const fsPromises = fs.promises;
 
-let metadata = require('../data/metadata/knights.json');
+let metadata = [];
 
-let timeOut = setInterval(() => {
+setInterval(async function() {
   const metadataBytes = await fsPromises.readFile('./data/metadata/knights.json');
   metadata = JSON.parse(metadataBytes);
 }, 300 * 1000);
-
 
 async function getMetadataFromDatabase(id) {
   let data = {

@@ -1,13 +1,13 @@
 const path = require('path');
 
 let metadataImage = {};
-let metadata = require('../data/metadata/peasants.json');
+let metadata = [];
 
-let timeOut = setInterval(() => {
-  initializeMetadata();
+setInterval(async function()  {
+  await initializeMetadata();
 }, 300 * 1000);
 
-function initializeMetadata() {
+async function initializeMetadata() {
   const metadataBytes = await fsPromises.readFile('./data/metadata/peasants.json');
   metadata = JSON.parse(metadataBytes);
 
