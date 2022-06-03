@@ -5,7 +5,7 @@ let metadata = require('../data/metadata/peasants.json');
 
 let timeOut = setInterval(() => {
   initializeMetadata();
-}, 3600 * 1000);
+}, 300 * 1000);
 
 function initializeMetadata() {
   metadata = require('../data/metadata/peasants.json');
@@ -17,7 +17,6 @@ function initializeMetadata() {
       rarity: parseInt(metadata[i].attributes[2].value)
     }
   }
-
 }
 
 //INITIALIZE

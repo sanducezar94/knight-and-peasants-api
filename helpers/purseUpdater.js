@@ -41,8 +41,6 @@ const updateMetadataFromContract = async function updateMetadataFromContract(con
         }
     }
 
-    console.log("Bags supply", currentSupply, results.length);
-
     for (let i = 0; i < results.length; i++) {
         let nft = metadata.filter(c => c.tokenId == i)[0];
         let purseData = results[i];

@@ -2,34 +2,6 @@ const fs = require('fs');
 const fsPromises = fs.promises;
 const axios = require('axios');
 
-var knightMetadata = [];
-var peasantMetadata = [];
-var itemList = ['purses'];
-var itemMetadata = {
-  purses: []
-};
-
-async function fetchMetadata() {
-  const knightMetadataBytes = await fsPromises.readFile('./data/metadata/knights.json');
-  knightMetadata = JSON.parse(knightMetadataBytes);
-
-  const peasantMetadataBytes = await fsPromises.readFile('./data/metadata/peasants.json');
-  peasantMetadata = JSON.parse(peasantMetadataBytes);
-
-  itemList.forEach(async (item) => {
-    const itemMetadataBytes = await fsPromises.readFile(`./data/metadata/${item}.json`);
-    itemMetadata[item] = JSON.parse(itemMetadataBytes);
-  });
-}
-
-setInterval(async () => {
-  await fetchMetadata();
-}, 1000 * 3600 * 0.11);
-
-setTimeout(async () => {
-  await fetchMetadata();
-}, 100);
-
 const collectionEndpoints = (app) => {
   app.get('/api/collectionData', async function (req, res, next) {
     try {

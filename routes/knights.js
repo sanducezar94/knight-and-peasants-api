@@ -6,7 +6,7 @@ let metadata = require('../data/metadata/knights.json');
 
 let timeOut = setInterval(() => {
     metadata = require('../data/metadata/knights.json');
-}, 3600 * 1000);
+},  300 * 1000);
 
 
 async function getMetadataFromDatabase(id) {
