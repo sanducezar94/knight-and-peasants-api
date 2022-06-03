@@ -33,6 +33,8 @@ const updateMetadataFromContract = async function updateMetadataFromContract(con
     let calls = [];
     let results = [];
 
+    console.log("Bags supply", currentSupply);
+
     for (let i = lastIndex; i < currentSupply; i += 1) {
         calls.push(contract.methods.getPurseContent(i));
 
@@ -75,9 +77,7 @@ const updateMetadataFromContract = async function updateMetadataFromContract(con
         });
     }
 
-    fs.writeFile('./data/metadata/purses.json', JSON.stringify(metadata), function (err) {
-        if (err) return console.log(err);
-    });
+    await fsPromises.writeFile('/data/metadata/purses.json', JSON.stringify(metadata));
 }
 
 module.exports = updateMetadataFromContract;
