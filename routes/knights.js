@@ -2,28 +2,30 @@ const path = require('path');
 const fs = require('fs');
 const fsPromises = fs.promises;
 
-let metadata = [];
+const knightEndpoints = (app) => {
+  let metadata = [];
 
-setInterval(async function() {
-  const metadataBytes = await fsPromises.readFile('./data/metadata/knights.json');
-  metadata = JSON.parse(metadataBytes);
-}, 300 * 1000);
-
-async function getMetadataFromDatabase(id) {
-  let data = {
-    tokenId: -1
-  };
-  for (let i = 0; i < metadata.length; i++) {
-    if (metadata[i].tokenId == id) {
-      data = metadata[i];
-      break;
+  setInterval(async function() {
+    const metadataBytes = await fsPromises.readFile('./data/metadata/knights.json');
+    metadata = JSON.parse(metadataBytes);
+  }, 300 * 1000);
+  
+  async function getMetadataFromDatabase(id) {
+    let data = {
+      tokenId: -1
+    };
+    for (let i = 0; i < metadata.length; i++) {
+      if (metadata[i].tokenId == id) {
+        data = metadata[i];
+        break;
+      }
     }
+  
+    return data;
   }
 
-  return data;
-}
+  //
 
-const knightEndpoints = (app) => {
   app.get('/images/knight/:old?', async function (req, res, next) {
     try {
       let id = parseInt(req.query["id"]);

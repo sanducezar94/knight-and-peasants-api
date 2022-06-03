@@ -1,44 +1,45 @@
 const path = require('path');
-
-
-let metadataImage = {};
-let metadata = [];
-
-setInterval(async function() {
-    await initializeMetadata();
-}, 300 * 1000);
-
-async function initializeMetadata() {
-    console.log("RELOADING BAGS");
-    const metadataBytes = await fsPromises.readFile('./data/metadata/purses.json');
-    metadata = JSON.parse(metadataBytes);
-    metadataImage = {};
-
-    for (let i = 0; i < metadata.length; i++) {
-        metadataImage[i] = {
-            type: metadata[i].attributes[1].value.toLowerCase(),
-            size: parseInt(metadata[i].attributes[2].value)
-        }
-    }
-    console.log("FINISHED RELOADING");
-}
-
-//INITIALIZE
-initializeMetadata();
-
-async function getMetadataFromDatabase(id) {
-    let data = {};
-    for (var i = 0; i < metadata.length; i++) {
-        if (metadata[i].tokenId == id) {
-            data = metadata[i];
-            break;
-        }
-    }
-
-    return data;
-}
+const fs = require('fs');
+const fsPromises = fs.promises;
 
 const bagsEndpoints = (app) => {
+    let metadataImage = {};
+    let metadata = [];
+
+    setInterval(async function () {
+        await initializeMetadata();
+    }, 300 * 1000);
+
+    async function initializeMetadata() {
+        console.log("RELOADING BAGS");
+        const metadataBytes = await fsPromises.readFile('./data/metadata/purses.json');
+        metadata = JSON.parse(metadataBytes);
+        metadataImage = {};
+
+        for (let i = 0; i < metadata.length; i++) {
+            metadataImage[i] = {
+                type: metadata[i].attributes[1].value.toLowerCase(),
+                size: parseInt(metadata[i].attributes[2].value)
+            }
+        }
+        console.log("FINISHED RELOADING");
+    }
+
+    //INITIALIZE
+    initializeMetadata();
+
+    async function getMetadataFromDatabase(id) {
+        let data = {};
+        for (var i = 0; i < metadata.length; i++) {
+            if (metadata[i].tokenId == id) {
+                data = metadata[i];
+                break;
+            }
+        }
+
+        return data;
+    }
+
     // takes a collection of ids and returns them all together
 
     app.get('/api/purses', async function (req, res, next) {
