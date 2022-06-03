@@ -9,6 +9,7 @@ let timeOut = setInterval(() => {
 }, 300 * 1000);
 
 function initializeMetadata() {
+    console.log("RELOADING BAGS");
     const metadataBytes = await fsPromises.readFile('./data/metadata/purses.json');
     metadata = JSON.parse(metadataBytes);
     metadataImage = {};
@@ -19,6 +20,7 @@ function initializeMetadata() {
             size: parseInt(metadata[i].attributes[2].value)
         }
     }
+    console.log("FINISHED RELOADING");
 }
 
 //INITIALIZE
