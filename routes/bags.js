@@ -2,22 +2,23 @@ const path = require('path');
 
 
 let metadataImage = {};
-let metadata = require('../data/metadata/purses.json');
+let metadata = [];
 
 let timeOut = setInterval(() => {
-  initializeMetadata();
+    initializeMetadata();
 }, 300 * 1000);
 
 function initializeMetadata() {
-  metadata = require('../data/metadata/purses.json');
-  metadataImage = {};
+    const metadataBytes = await fsPromises.readFile('./data/metadata/purses.json');
+    metadata = JSON.parse(metadataBytes);
+    metadataImage = {};
 
-  for (let i = 0; i < metadata.length; i++) {
-    metadataImage[i] = {
-      type: metadata[i].attributes[1].value.toLowerCase(),
-      size: parseInt(metadata[i].attributes[2].value)
+    for (let i = 0; i < metadata.length; i++) {
+        metadataImage[i] = {
+            type: metadata[i].attributes[1].value.toLowerCase(),
+            size: parseInt(metadata[i].attributes[2].value)
+        }
     }
-  }
 }
 
 //INITIALIZE

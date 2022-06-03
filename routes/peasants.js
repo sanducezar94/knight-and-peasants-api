@@ -8,7 +8,9 @@ let timeOut = setInterval(() => {
 }, 300 * 1000);
 
 function initializeMetadata() {
-  metadata = require('../data/metadata/peasants.json');
+  const metadataBytes = await fsPromises.readFile('./data/metadata/peasants.json');
+  metadata = JSON.parse(metadataBytes);
+
   metadataImage = {};
 
   for (let i = 0; i < metadata.length; i++) {
