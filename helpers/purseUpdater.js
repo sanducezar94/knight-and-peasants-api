@@ -32,7 +32,7 @@ const updateMetadataFromContract = async function updateMetadataFromContract(con
     let calls = [];
     let results = [];
 
-    for (let i = 0; i < 347; i += 1) {
+    for (let i = 0; i < currentSupply; i += 1) {
         calls.push(contract.methods.getPurseContent(i));
 
         if (i % BATCH_SIZE >= BATCH_SIZE - 1 || i === currentSupply - 1) {
