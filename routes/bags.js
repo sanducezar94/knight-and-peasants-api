@@ -62,8 +62,6 @@ const bagsEndpoints = (app) => {
     app.get('/images/bags', async function (req, res, next) {
         try {
             const id = parseInt(req.query["id"]);
-
-            console.log(metadataImage[id]);
             const type = metadataImage[id].type;
             const size = metadataImage[id].size;
 

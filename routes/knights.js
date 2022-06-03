@@ -1,4 +1,6 @@
 const path = require('path');
+const fs = require('fs');
+const fsPromises = fs.promises;
 
 let metadata = require('../data/metadata/knights.json');
 
