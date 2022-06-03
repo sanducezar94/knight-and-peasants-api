@@ -6,7 +6,7 @@ let metadata = require('../data/metadata/purses.json');
 
 let timeOut = setInterval(() => {
   initializeMetadata();
-}, 3600 * 1000);
+}, 300 * 1000);
 
 function initializeMetadata() {
   metadata = require('../data/metadata/purses.json');
