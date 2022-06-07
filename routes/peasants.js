@@ -68,9 +68,7 @@ const peasantEndpoints = (app) => {
       const id = parseInt(req.query["id"]);
       let data = await getMetadataFromDatabase(id);
 
-      return res.send({
-        data: data
-      });
+      return res.send(data);
     } catch (err) {
       return res.status(500).send('Internal Error');
     }

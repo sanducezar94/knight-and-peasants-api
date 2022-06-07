@@ -5,6 +5,14 @@ const fsPromises = fs.promises;
 const knightEndpoints = (app) => {
   let metadata = [];
 
+  async function initializeMetadata() {
+    const metadataBytes = await fsPromises.readFile('./data/metadata/knights.json');
+    metadata = JSON.parse(metadataBytes);
+  }
+  
+  //INITIALIZE
+  initializeMetadata();
+
   setInterval(async function() {
     const metadataBytes = await fsPromises.readFile('./data/metadata/knights.json');
     metadata = JSON.parse(metadataBytes);
@@ -14,10 +22,10 @@ const knightEndpoints = (app) => {
     let data = {
       tokenId: -1
     };
+
     for (let i = 0; i < metadata.length; i++) {
       if (metadata[i].tokenId == id) {
-        data = metadata[i];
-        break;
+        return metadata[i];
       }
     }
   
@@ -136,19 +144,11 @@ const knightEndpoints = (app) => {
 
   app.get('/api/knight', async function (req, res, next) {
     try {
-      const knightId = req.query.id
-      const totalSupply = 5000; //await contract.methods.totalSupply().call();
-
+      const knightId = parseInt(req.query.id)
       let id = parseInt(knightId);
+      let meta = await getMetadataFromDatabase(id);
 
-      if (totalSupply > id) {
-        let meta = await getMetadataFromDatabase(id);
-        return res.send({
-          data: meta
-        });
-      } else {
-        return res.status(500).send('Not yet minted');
-      }
+      return res.send(meta);
     } catch (err) {
       return res.status(500).send('Internal Error');
     }
