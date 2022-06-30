@@ -1,7 +1,7 @@
 const fs = require('fs');
 const fsPromises = fs.promises;
 
-const peasantProfessions = ["Farmer", "Alchemist", "Blacksmith"];
+const peasantProfessions = ["Farmer", "Alchemist", "Blacksmith", "Hunter"];
 const peasantRarities = ["Wood", "Iron", "Bronze", "Gold", "Platinum"];
 const peasantSkill = ["Novice", "Amateur", "Advanced", "Competent", "Expert", "Grandmaster"];
 
@@ -156,7 +156,12 @@ async function updateRarity(traitRarityList, metadata) {
 
         for (let j = 0; j < attributes.length; j++) {
             const attributeKey = attributes[j].trait_type.replaceAll(' ', '') + attributes[j].value.replaceAll(' ', '');
-            rarityScore += 1 / parseFloat(traitRarityList[attributeKey].percentage);
+            const multiplier = 1;
+            
+            if(attributes[j] === 'Rarity Type'){
+                multiplier = 2;
+            }
+            rarityScore += multiplier * (1 / parseFloat(traitRarityList[attributeKey].percentage));
         }
 
         rarityList.push({

@@ -5,6 +5,8 @@ const purseSizes = [10, 50, 100, 250, 500, 1000, 2500, 5000];
 const purseMappings = {
     "0x5a9ac6c271653dc5660ae90e8ecf1401164a2690": "Farmer",
     "0x9aa6715bfa11e5bd63af420f480c758c7038e08a": "Alchemist",
+    "0x31e4af126159393517f5fb4d93fad5920ae859ef": "Blacksmith",
+    "0x55bc9d8f4bfadc4e2e2146948a61f3808e307e09": "Hunter"
 }
 
 function updateTrait(nft, attribute) {

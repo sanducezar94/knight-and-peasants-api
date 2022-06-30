@@ -1,1 +1,90 @@
-{"ProfessionNameFarmer":{"count":1387,"percentage":"0.523"},"RarityTypeWood":{"count":1492,"percentage":"0.563"},"Talent1":{"count":1670,"percentage":"0.630"},"Labour1":{"count":1546,"percentage":"0.583"},"SkillNameAmateur":{"count":145,"percentage":"0.055"},"ProfessionNameAlchemist":{"count":1264,"percentage":"0.477"},"RarityTypeIron":{"count":755,"percentage":"0.285"},"SkillNameNovice":{"count":2412,"percentage":"0.910"},"Talent2":{"count":739,"percentage":"0.279"},"Labour3":{"count":223,"percentage":"0.084"},"SkillNameAdvanced":{"count":54,"percentage":"0.020"},"Labour2":{"count":792,"percentage":"0.299"},"RarityTypeBronze":{"count":292,"percentage":"0.110"},"Talent3":{"count":174,"percentage":"0.066"},"Labour4":{"count":90,"percentage":"0.034"},"SkillNameExpert":{"count":11,"percentage":"0.004"},"RarityTypePlatinum":{"count":26,"percentage":"0.010"},"SkillNameCompetent":{"count":21,"percentage":"0.008"},"RarityTypeGold":{"count":86,"percentage":"0.032"},"Talent4":{"count":68,"percentage":"0.026"},"SkillNameGrandmaster":{"count":8,"percentage":"0.003"}}
+{
+    "ProfessionNameFarmer": {
+        "count": 1561,
+        "percentage": "0.480"
+    },
+    "RarityTypeWood": {
+        "count": 1836,
+        "percentage": "0.564"
+    },
+    "Talent1": {
+        "count": 2043,
+        "percentage": "0.628"
+    },
+    "Labour1": {
+        "count": 1880,
+        "percentage": "0.578"
+    },
+    "SkillNameAmateur": {
+        "count": 166,
+        "percentage": "0.051"
+    },
+    "ProfessionNameAlchemist": {
+        "count": 1424,
+        "percentage": "0.438"
+    },
+    "RarityTypeIron": {
+        "count": 911,
+        "percentage": "0.280"
+    },
+    "SkillNameNovice": {
+        "count": 2958,
+        "percentage": "0.909"
+    },
+    "Talent2": {
+        "count": 915,
+        "percentage": "0.281"
+    },
+    "Labour3": {
+        "count": 268,
+        "percentage": "0.082"
+    },
+    "SkillNameAdvanced": {
+        "count": 72,
+        "percentage": "0.022"
+    },
+    "Labour2": {
+        "count": 1000,
+        "percentage": "0.307"
+    },
+    "RarityTypeBronze": {
+        "count": 365,
+        "percentage": "0.112"
+    },
+    "Talent3": {
+        "count": 215,
+        "percentage": "0.066"
+    },
+    "Labour4": {
+        "count": 106,
+        "percentage": "0.033"
+    },
+    "SkillNameExpert": {
+        "count": 21,
+        "percentage": "0.006"
+    },
+    "RarityTypePlatinum": {
+        "count": 36,
+        "percentage": "0.011"
+    },
+    "SkillNameCompetent": {
+        "count": 27,
+        "percentage": "0.008"
+    },
+    "RarityTypeGold": {
+        "count": 106,
+        "percentage": "0.033"
+    },
+    "Talent4": {
+        "count": 81,
+        "percentage": "0.025"
+    },
+    "SkillNameGrandmaster": {
+        "count": 10,
+        "percentage": "0.003"
+    },
+    "ProfessionNameBlacksmith": {
+        "count": 269,
+        "percentage": "0.083"
+    }
+}

@@ -8,7 +8,7 @@ const app = express();
 const Web3 = require('web3');
 
 const chainKey = 'mainnet';
-const provider = chainKey === 'testnet' ? 'https://api.s0.b.hmny.io' : 'https://rpc.gainzstation.one/';
+const provider = chainKey === 'testnet' ? 'https://api.s0.b.hmny.io' : 'https://api.s0.t.hmny.io/';
 
 const web3 = new Web3(new Web3.providers.HttpProvider(provider));
 const campContract = new web3.eth.Contract(TrainingCamp.abi, TrainingCamp[chainKey]);
